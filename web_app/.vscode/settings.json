@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "JavaFiles/HttpPostJsonReq/lib/json-20201115.jar",
+        "JavaFiles/HttpPostJsonReq/json-20201115.jar"
+    ]
+}
