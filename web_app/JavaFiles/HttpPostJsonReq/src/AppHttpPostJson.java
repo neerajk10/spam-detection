@@ -1,4 +1,4 @@
-// package JavaFiles.HttpPostJsonReq.src;
+package JavaFiles.HttpPostJsonReq.src;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,6 +47,7 @@ public class AppHttpPostJson {
             System.out.println("Printing <JSONObject> obj :" + obj);
 			System.out.println("length of JSON obj : " + obj.length());
 			System.out.println("extracted id = " + obj.get("id"));
+			System.out.println("Extracted spam = " + obj.get("spam"));
 		}
     }
 }

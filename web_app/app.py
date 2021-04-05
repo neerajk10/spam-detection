@@ -19,12 +19,17 @@ def predict():
         if not bool_is_json:
             return json.jsonify("{\"result\": \"invalid JSON format\"}"), 400
         else:
-            temp = request.get_json()
             id = request.json.get("id", None)
             number = request.json.get("number", None)
             message = request.json.get("message_body", None)
-            str = {"result" : "This be a valid req niqqa", "id": "" + id + ""}
-            return json.dumps(str)
+            print("request components : ")
+            print("id : ", id)           
+            print("number : ", number)
+            print("message: ", message)
+            spam = False
+            # str = {"result" : "This be a valid req niqqa", "id": "" + id + ""}
+            result = {"result" : "This be a valid req niqqa", "id": "" + id + "", "spam" : "" + str(spam) + ""}
+            return json.dumps(result)
             # return json.jsonify("{\"result\" : \"This be a valid req niqqa\", \"id\": \"" + id + "\"}"), 200
             # return json.jsonify("{'result' : 'This be a valid req niqqa', 'id': '" + id + "'}"), 200
     else:
