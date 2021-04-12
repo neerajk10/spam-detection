@@ -7,6 +7,7 @@ import pandas as pd
 import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
+# import lightgbm 
 
 myapp = Flask(__name__)
 
@@ -14,6 +15,7 @@ myapp = Flask(__name__)
 def predict():
     model = pickle.load(open("../model/spam_model.pkl", "rb"))
     tfidf_model = pickle.load(open("../model/tfidf_model.pkl", "rb"))
+
     if request.method == "POST":
         bool_is_json = request.is_json
         if not bool_is_json:
@@ -28,32 +30,39 @@ def predict():
             print("message: ", message)
             spam = False #set by DMM 
 
-            message = message.str.replace(
-            r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddress')
-            message = message.str.replace(
+            
+            dataset = {'message': message}
+            data = pd.DataFrame(dataset, index=[0]);
+            # data = pd.DataFrame({'message': message});
+            data["message"] = data["message"].str.replace(
+                r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddress')
+            data["message"] = data["message"].str.replace(
                 r'^http\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$', 'webaddress')
-            message = message.str.replace(r'£|\$', 'money-symbol')
-            message = message.str.replace(
+            data["message"] = data["message"].str.replace(r'£|\$', 'money-symbol')
+            data["message"] = data["message"].str.replace(
                 r'^\(?[\d]{3}\)?[\s-]?[\d]{3}[\s-]?[\d]{4}$', 'phone-number')
-            message = message.str.replace(r'\d+(\.\d+)?', 'number')
-            message = message.str.replace(r'[^\w\d\s]', ' ')
-            message = message.str.replace(r'\s+', ' ')
-            message = message.str.replace(r'^\s+|\s*?$', ' ')
-            message = message.str.lower()
+            data["message"] = data["message"].str.replace(r'\d+(\.\d+)?', 'number')
+            data["message"] = data["message"].str.replace(r'[^\w\d\s]', ' ')
+            data["message"] = data["message"].str.replace(r'\s+', ' ')
+            data["message"] = data["message"].str.replace(r'^\s+|\s*?$', ' ')
+            data["message"] = data["message"].str.lower()
 
             stop_words = set(stopwords.words('english'))
-            message = message.apply(lambda x: ' '.join(
+            data["message"] = data["message"].apply(lambda x: ' '.join(
                 term for term in x.split() if term not in stop_words))
             ss = nltk.SnowballStemmer("english")
-            message = message.apply(lambda x: ' '.join(ss.stem(term)
+            data["message"] = data["message"].apply(lambda x: ' '.join(ss.stem(term)
                                                                     for term in x.split()))
 
             # tfidf_model = TfidfVectorizer()
-            tfidf_vec = tfidf_model.transform(message)
+            tfidf_vec = tfidf_model.transform(data["message"])
             tfidf_data = pd.DataFrame(tfidf_vec.toarray())
             my_prediction = model.predict(tfidf_data)
 
+
             spam = my_prediction
+
+
 
             # str = {"result" : "This be a valid req niqqa", "id": "" + id + ""}
             result = {"result" : "This be a valid req niqqa", "id": "" + id + "", "spam" : "" + str(spam) + ""}
