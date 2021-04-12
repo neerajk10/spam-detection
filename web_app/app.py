@@ -28,11 +28,10 @@ def predict():
             print("id : ", id)           
             print("number : ", number)
             print("message: ", message)
-            spam = False #set by DMM 
 
-            
+            message = [message]
             dataset = {'message': message}
-            data = pd.DataFrame(dataset, index=[0]);
+            data = pd.DataFrame(dataset)
             # data = pd.DataFrame({'message': message});
             data["message"] = data["message"].str.replace(
                 r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddress')
@@ -61,7 +60,9 @@ def predict():
 
 
             spam = my_prediction
-
+            print("prediction: ")
+            for pred in spam:
+                print(pred)
 
 
             # str = {"result" : "This be a valid req niqqa", "id": "" + id + ""}
