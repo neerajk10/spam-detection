@@ -68,7 +68,9 @@ def predict():
             result = {"result" : "This be a valid req niqqa", "id": "" + id + "", "spam" : "" + str(spam) + ""}
             return json.dumps(result)
     else:
-            return json.jsonify("{\"result\": \"API only responds to POST request\"}"), 400
+            result = {"result" : "API only responds o POST request"}, 400
+            # return json.jsonify("{\"result\": \"API only responds to POST request\"}"), 400
+            return json.dumps(result)
 
 if __name__ == '__main__':
     myapp.run(port=5000, debug=True)
