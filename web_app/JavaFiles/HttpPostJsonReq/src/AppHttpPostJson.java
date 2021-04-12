@@ -23,7 +23,12 @@ public class AppHttpPostJson {
 		
 		//JSON String need to be constructed for the specific resource. 
 		//We may construct complex JSON using any third-party JSON libraries such as jackson or org.json
-		String jsonInputString = "{\"id\": \"1000\", \"number\": \"9999977777\", \"message_body\": \"Hi, I am in a meeting. Will call back later.\"}";
+		String id = "\"1000\"";
+		String number = "\"9999977777\"";
+		String message_body = "\"Hi, I am in a meeting. Will call back later.\"";
+		message_body = "\"URGENT! Your Mobile No 07808726822 was awarded a L2,000 Bonus Caller Prize on 02/09/03! This is our 2nd attempt to contact YOU! Call 0871-872-9758 BOX95QU\"";
+		// String jsonInputString = "{\"id\": \"1000\", \"number\": \"9999977777\", \"message_body\": \"Hi, I am in a meeting. Will call back later.\"}";
+		String jsonInputString = "{\"id\": " + id + ", \"number\": " + number + ", \"message_body\": "+ message_body + "}";
 		
 		try(OutputStream os = con.getOutputStream()){
 			byte[] input = jsonInputString.getBytes("utf-8");
@@ -51,4 +56,3 @@ public class AppHttpPostJson {
 		}
     }
 }
-
