@@ -10,5 +10,5 @@ type ` java -cp .;..\lib\json-20201115.jar AppHttpPostJson ` from the src folder
 
 [optional] 
 3. To compile the AppHttpPostJson.java
-
-   type `javac -cp ..\lib\json-20201115.jar AppHttpPostJson.java` from the src folder
+   1. Go to the JavaFiles/HttpPostJson/src folder
+   type `javac -cp ..\lib\json-20201115.jar AppHttpPostJson.java` from 
