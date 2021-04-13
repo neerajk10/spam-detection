@@ -12,6 +12,10 @@
 
 # How to Run
 
-1. Go to the spam-detection\web_app\JavaFiles\HttpPostJsonReq\src folder and type  
+1. Go to spam-detection\web_app and run 
+
+``` python app.py ```
+
+2. Go to the spam-detection\web_app\JavaFiles\HttpPostJsonReq\src folder and type  
 
 ``` java -cp .;..\lib\json-20201115.jar AppHttpPostJson ```
