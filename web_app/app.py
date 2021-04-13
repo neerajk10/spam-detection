@@ -64,9 +64,7 @@ def predict():
             for pred in spam:
                 print(pred)
 
-
-            # str = {"result" : "This be a valid req niqqa", "id": "" + id + ""}
-            result = {"result" : "This be a valid req niqqa", "id": "" + id + "", "spam" : "" + str(spam) + ""}
+            result = {"result" : "This is a valid req", "id": "" + id + "", "spam" : "" + str(spam) + ""}
             return json.dumps(result)
     else:
             result = {"result" : "API only responds o POST request"}, 400
