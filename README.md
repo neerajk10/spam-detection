@@ -7,7 +7,7 @@
 
 2. To compile the AppHttpPostJson.java                [optional] 
 
-   Go to the spam-detection\web_app\JavaFiles\HttpPostJsonReq\src folder and type 
+   Go to the `spam-detection\web_app\JavaFiles\HttpPostJsonReq\src` folder and type 
     ```javac -cp ..\lib\json-20201115.jar AppHttpPostJson.java```
 
 
@@ -17,6 +17,6 @@
 
 ``` python app.py ```
 
-2. Go to the spam-detection\web_app\JavaFiles\HttpPostJsonReq\src folder and type  
+2. Go to the `spam-detection\web_app\JavaFiles\HttpPostJsonReq\src` folder and type  
 
 ``` java -cp .;..\lib\json-20201115.jar AppHttpPostJson ```
