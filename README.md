@@ -14,7 +14,7 @@
 
 # How to Run
 
-1. Navigate to spam-detection\web_app and run 
+1. Navigate to `spam-detection\web_app` and run 
 
 ``` python app.py ```
 
