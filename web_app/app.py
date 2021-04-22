@@ -15,7 +15,13 @@ def predict():
     if request.method == "POST":
         bool_is_json = request.is_json
         if not bool_is_json:
-            return json.jsonify("{\"result\": \"invalid JSON format\"}"), 400
+            jsonlist = []
+            jsondict = {"error": "ERROR_INVALIDJSONFORMAT"}
+            jsonlist.append(jsondict)
+            mainjsondict = {"result": jsonlist}
+            result = mainjsondict
+            print("JSON error encountered")
+            return json.dumps(result), 200
         else:
             model = pickle.load(open("../model/spam_model.pkl", "rb"))
             tfidf_model = pickle.load(open("../model/tfidf_model.pkl", "rb"))
@@ -25,14 +31,22 @@ def predict():
             print("printing json entries")
 
             jsonlist = []
-            
+            jsonerror = False
             spam = False
             for jo in entries:
                 jsondict = {}
                 print("id = ", jo['id'])
                 id = jo['id']
+                #check if id is string
+                if not isinstance(id, str):
+                    jsonerror = True
+                    break
                 print("message_body = ", jo['message_body'])
                 message = jo['message_body']
+                #check if message is string
+                if not isinstance(message, str):
+                    jsonerror = True
+                    break
                 #process this message and predict spam or not, for now we will put dummy True and False alternatively
                 
                 message = [message]
@@ -66,6 +80,15 @@ def predict():
                 # spam = not spam
                 jsonlist.append(jsondict)
             
+            if  jsonerror:
+                print("JSON error encountered")
+                jsonlist = []
+                jsondict = {"error": "ERROR_INVALIDJSONFORMAT"}
+                jsonlist.append(jsondict)
+                mainjsondict = {"result": jsonlist}
+                result = mainjsondict
+                return json.dumps(result), 200
+
             print("printing jsonlist")
             print(jsonlist)
             mainjsondict = {"result": None}
