@@ -1,3 +1,4 @@
+#without json array
 import os
 import warnings
 import nexmo
