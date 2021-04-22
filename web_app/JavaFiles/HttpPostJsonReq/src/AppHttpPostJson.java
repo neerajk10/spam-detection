@@ -86,10 +86,22 @@ public class AppHttpPostJson {
 			for(int i=0; i<result_ja.length(); i++){
 				JSONObject tempjo = (JSONObject) result_ja.get(i);
 				System.out.printf("[%d]  %s\n", i, tempjo.toString());
+				try{
+					System.out.println("extract ID and spam prediction from the JSON object");
+					System.out.printf("[%d]  %s  -   %s\n", i, tempjo.get("id").toString(), tempjo.get("spam").toString());	
+				}
+				catch(Exception e){
+					e.printStackTrace();
+					try{
+						System.out.println("got error : " + tempjo.get("error").toString());
+					}
+					catch(Exception e1){
+						e1.printStackTrace();
+					}
+				}
+				System.out.println();
 			}
 
-			// System.out.println("extracted id = " + obj.get("id"));
-			// System.out.println("Extracted spam = " + obj.get("spam"));
 		}
     }
 }
